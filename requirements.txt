@@ -1,0 +1,13 @@
+pytest
+black
+requests
+pyjwt
+python-dotenv
+apispec
+pylint
+fastapi
+uvicorn
+sqlalchemy
+mysqlclient
+httpx
+python-multipart

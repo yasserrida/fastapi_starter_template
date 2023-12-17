@@ -1,0 +1,29 @@
+version: "3"
+services:
+  mysql:
+    container_name: mysql
+    build: ./mysql/
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/db:/var/lib/mysql
+      - ./mysql/conf.d:/etc/mysql/conf.d
+    env_file:
+      - ./mysql/local.env
+  api:
+    depends_on:
+      - mysql
+    container_name: fast_api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./api:/app
+    ports:
+      - 8000:8000
+    env_file:
+      - ./api/.env
